@@ -11,7 +11,7 @@ namespace SwiftDevLabs\CRM\Models;
 
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\ORM\DataObject;
-use SwiftDevLabs\CRM\Models\OpportunityStage;
+use SwiftDevLabs\CRM\Models\Opportunity;
 
 class OpportunityStage extends DataObject
 {
@@ -32,19 +32,21 @@ class OpportunityStage extends DataObject
         ],
         [
             'Title'       => 'Won',
-            'Description' => 'Opportunities that have been won.',
+            'Description' => 'Opportunities that has been won.',
             'System'      => true,
         ],
         [
             'Title'       => 'Lost',
-            'Description' => 'Opportunities that have been lost.',
+            'Description' => 'Opportunities that has been lost.',
             'System'      => true,
         ],
     ];
 
     private static $has_many = [
-        'Opportunities' => OpportunityStage::class,
+        'Opportunities' => Opportunity::class,
     ];
+
+    private static $default_sort = "Sort";
 
     public function getCMSFields()
     {
