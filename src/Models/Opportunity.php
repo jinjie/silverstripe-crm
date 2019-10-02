@@ -46,8 +46,6 @@ class Opportunity extends DataObject
         'Created',
     ];
 
-    // private static $default_sort = 'CRM_Stage.Sort ASC';
-
     // Config
     private static $quotations_folder_name = 'Uploads/Quotations';
 
