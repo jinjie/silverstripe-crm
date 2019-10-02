@@ -1,0 +1,7 @@
+---
+name: silverstripe-crm
+---
+
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    - SwiftDevLabs\CRM\Extensions\SiteConfigExtension

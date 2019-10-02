@@ -1,0 +1,32 @@
+{
+    "name": "jinjie/silverstripe-crm",
+    "description": "A very simple CRM",
+    "type": "silverstripe-vendormodule",
+    "license": "MIT License",
+    "authors": [
+        {
+            "name": "Kong Jin Jie",
+            "email": "jinjie@swiftdev.sg"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "silverstripe/recipe-core": "^4",
+        "symbiote/silverstripe-gridfieldextensions": "^3.2",
+        "symbiote/silverstripe-addressable": "^5"
+    },
+    "extra": {
+        "project-files-installed": [
+            "app/.htaccess",
+            "app/_config.php",
+            "app/_config/mysite.yml"
+        ],
+        "public-files-installed": [
+            ".htaccess",
+            "index.php",
+            "install-frameworkmissing.html",
+            "install.php",
+            "web.config"
+        ]
+    }
+}
