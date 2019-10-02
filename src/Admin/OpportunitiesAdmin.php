@@ -34,7 +34,7 @@ class OpportunitiesAdmin extends ModelAdmin
         $list = $list
             ->leftJoin(
                 $pipelineTable,
-                "{$opportunityTable}.StageID = {$pipelineTable}.ID"
+                "{$opportunityTable}.PipelineID = {$pipelineTable}.ID"
             )
             ->sort("{$pipelineTable}.Sort, Created DESC");
 
