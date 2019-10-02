@@ -12,7 +12,7 @@ namespace SwiftDevLabs\CRM\Admin;
 use SilverStripe\Admin\ModelAdmin;
 use SilverStripe\Forms\GridField\GridField;
 use SwiftDevLabs\CRM\Models\Opportunity;
-use SwiftDevLabs\CRM\Models\OpportunityStage;
+use SwiftDevLabs\CRM\Models\Pipeline;
 
 class OpportunitiesAdmin extends ModelAdmin
 {
@@ -29,14 +29,14 @@ class OpportunitiesAdmin extends ModelAdmin
         $list = parent::getList();
 
         $opportunityTable = singleton(Opportunity::class)->baseTable();
-        $stageTable       = singleton(OpportunityStage::class)->baseTable();
+        $pipelineTable    = singleton(Pipeline::class)->baseTable();
 
         $list = $list
             ->leftJoin(
-                $stageTable,
-                "{$opportunityTable}.StageID = {$stageTable}.ID"
+                $pipelineTable,
+                "{$opportunityTable}.StageID = {$pipelineTable}.ID"
             )
-            ->sort("{$stageTable}.Sort, Created DESC");
+            ->sort("{$pipelineTable}.Sort, Created DESC");
 
         return $list;
     }

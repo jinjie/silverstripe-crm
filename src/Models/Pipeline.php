@@ -1,7 +1,7 @@
 <?php
 
 /**
- * OpportunityStage
+ * Pipeline
  *
  * @package SwiftDevLabs\CRM\Models
  * @author Kong Jin Jie <jinjie@swiftdev.sg>
@@ -13,12 +13,13 @@ use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\ORM\DataObject;
 use SwiftDevLabs\CRM\Models\Opportunity;
 
-class OpportunityStage extends DataObject
+class Pipeline extends DataObject
 {
-    private static $table_name = 'CRM_OpportunityStage';
+    private static $table_name = 'CRM_Pipeline';
 
     private static $db = [
         'Title'       => 'Varchar(50)',
+        'Probability' => 'Int',
         'Description' => 'Text',
         'System'      => 'Boolean',
         'Sort'        => 'Int',
@@ -28,16 +29,19 @@ class OpportunityStage extends DataObject
         [
             'Title'       => 'New',
             'Description' => 'Any new opportunities will be categorised here.',
+            'Probability' => '10',
             'System'      => true,
         ],
         [
             'Title'       => 'Won',
             'Description' => 'Opportunities that has been won.',
+            'Probability' => '100',
             'System'      => true,
         ],
         [
             'Title'       => 'Lost',
             'Description' => 'Opportunities that has been lost.',
+            'Probability' => '0',
             'System'      => true,
         ],
     ];
@@ -47,6 +51,12 @@ class OpportunityStage extends DataObject
     ];
 
     private static $default_sort = "Sort";
+
+    private static $summary_fields = [
+        'Title',
+        'Probability'   => 'Probability (%)',
+        'Description',
+    ];
 
     public function getCMSFields()
     {
@@ -59,7 +69,7 @@ class OpportunityStage extends DataObject
         return $fields;
     }
 
-    public static function getNewStage()
+    public static function getNewPipeline()
     {
         return self::get()->filter('Title', 'New')->first();
     }
