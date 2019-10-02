@@ -38,11 +38,11 @@ class Opportunity extends DataObject
     ];
 
     private static $summary_fields = [
+        'Contact.FullName'    => 'Contact',
+        'Contact.CompanyName' => 'Company',
         'TitleFriendly'       => 'Title',
         'Value.Nice'          => 'Value',
         'Stage.Title'         => 'Stage',
-        'Contact.FullName'    => 'Contact',
-        'Contact.CompanyName' => 'Company',
         'Created',
     ];
 
