@@ -2,7 +2,7 @@
     "name": "jinjie/silverstripe-crm",
     "description": "A very simple CRM",
     "type": "silverstripe-vendormodule",
-    "license": "MIT License",
+    "license": "MIT",
     "authors": [
         {
             "name": "Kong Jin Jie",
