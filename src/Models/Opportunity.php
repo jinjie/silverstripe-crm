@@ -13,7 +13,9 @@ use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\File;
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\SiteConfig\SiteConfig;
+use SilverStripe\View\HTML;
 use SwiftDevLabs\CRM\Models\Contact;
 use SwiftDevLabs\CRM\Models\Pipeline;
 
@@ -46,6 +48,11 @@ class Opportunity extends DataObject
         'Value.Nice'          => 'Value',
         'Pipeline.Title'      => 'Pipeline',
         'Created',
+        'ClosingDaysAgo'      => '',
+    ];
+
+    private static $casting = [
+        'ClosingDaysAgo'    => 'HTMLText',
     ];
 
     // Config
@@ -98,5 +105,38 @@ class Opportunity extends DataObject
     public function getTitleFriendly()
     {
         return ($this->Title ?: "---");
+    }
+
+    /**
+     * Get number of days to expected closing date
+     * @return int Number of days
+     */
+    public function getClosingDaysAgo()
+    {
+        $expectedClosingDate = $this->obj('ExpectedClosingDate');
+
+        if (! $expectedClosingDate->getValue()) {
+            $text = "Closing Date Not Set";
+        } else {
+            $text = ($expectedClosingDate->InFuture() ?
+                "Expected closing " :
+                "Expired "
+            ) . $expectedClosingDate->Ago();
+        }
+
+        return DBHTMLText::create()
+            ->setValue(
+                HTML::createTag(
+                    'span',
+                    [
+                        'class' => (
+                            ($expectedClosingDate->getValue() and $expectedClosingDate->InFuture()) ?
+                                'card border-0 px-2 py-1 bg-success d-inline text-white' :
+                                'card border-0 px-2 py-1 bg-warning d-inline text-dark'
+                        )
+                    ],
+                    $text
+                )
+            );
     }
 }
