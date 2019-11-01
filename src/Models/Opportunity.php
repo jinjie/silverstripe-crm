@@ -115,6 +115,19 @@ class Opportunity extends DataObject
     {
         $expectedClosingDate = $this->obj('ExpectedClosingDate');
 
+        if ($this->Pipeline()->Title == 'Won' || $this->Pipeline()->Title == 'Lost') {
+            return DBHTMLText::create()
+                ->setValue(
+                    HTML::createTag(
+                        'span',
+                        [
+                            'class' => 'card border-0 px-2 py-1 bg-light d-inline',
+                        ],
+                        $this->Pipeline()->Title
+                    )
+                );
+        }
+
         if (! $expectedClosingDate->getValue()) {
             $text = "Closing Date Not Set";
         } else {
